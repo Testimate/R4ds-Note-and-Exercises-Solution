@@ -1,0 +1,137 @@
+---
+title: "R4ds Chapter 5 Data Transformation Yuqing Xue Personal Note"
+author: "Yuqing Xue"
+date: "October 22, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<br>
+
+#### nycflights13
+```{r message=FALSE, warning=FALSE}
+##########################################
+#######  5 Data Transformation
+########################################## 
+library(nycflights13)
+library(tidyverse)
+nycflights13::flights
+```
+
+<br>
+
+#### Explore, try %in%
+```{r explore}
+
+jan1 <- filter(flights, month == 1, day == 1)
+
+nov_and_dec = filter(flights, month == 11 | month == 12)
+## A useful short-hand for this problem is x %in% y. This will select every row where x is one of the values in y.
+nov_dec <- filter(flights, month %in% c(11, 12))
+```
+
+```{r NYC to San Fransisco Bay Area}
+
+NYCtoSF <-  
+  flights %>% 
+    filter(dest %in% c("SFO", "OAK", "SJC")) %>%
+      select(year, month, day, carrier, origin, dest, air_time)
+NYCtoSF
+
+NYCtoSF2 <-  
+  flights %>% 
+    filter(dest == "SFO" | dest == "OAK" |  dest == "SJC") %>%
+      select(year, month, day, carrier, origin, dest, air_time)
+NYCtoSF2
+
+# H.W. As well as & and |, R also has && and ||. Don’t use them here! You’ll learn when you should use them in conditional execution.
+
+``` 
+
+<br>
+
+####  5.2.4 Exercises
+```{r exercise 1.1}
+ 
+#################################
+### 1. Find all flights that
+# ###############################
+## 1. Had an arrival delay of two or more hours
+## 2. Flew to Houston (IAH or HOU)
+## 3. Were operated by United, American, or Delta
+## 4. Departed in summer (July, August, and September)
+## 5. Arrived more than two hours late, but didn’t leave late
+## 6. Were delayed by at least an hour, but made up over 30 minutes in flight
+## 7. Departed between midnight and 6am (inclusive)
+
+Ex1.1 <- 
+  flights %>%
+    filter(arr_delay >= 120) %>%
+      arrange(desc(arr_delay)) %>%
+        select(month, day, carrier, origin, dest, dep_delay, arr_delay)
+Ex1.1
+```
+
+```{r exercise 1.2 - 1.4}
+Ex1.2 = filter(flights, dest %in% c("IAH","HOU"))
+Ex1.3 = filter(flights, carrier %in% c("UA","AA","DL"))
+Ex1.4 = filter(flights, month %in% c(7,8,9))
+```
+
+```{r exercise 1.5 - 1.7}
+Ex1.5 = filter(flights, arr_delay >= 120 & dep_delay <= 0 )
+Ex1.6 = filter(flights, dep_delay >= 60 & dep_delay - arr_delay >= 30)
+Ex1.7 = filter(flights, dep_time <= 600)
+```
+
+```{r exercise 2}
+
+#################################
+### 2. Another useful dplyr filtering helper is between(). 
+###    What does it do? Can you use it to simplify the code needed to answer the previous challenges?
+#################################
+
+?between
+Ex1.4b = filter(flights, between(month, 7, 9))
+```
+
+
+```{r exercise 3}
+#################################
+### 3. How many flights have a missing dep_time? What other variables are missing? 
+###    What might these rows represent?
+#################################
+
+sum(is.na(flights$dep_time) ) # 8255
+
+flights_missing_dep_time <- flights %>% filter(is.na(dep_time))
+flights_missing_dep_time 
+
+flights_cancelled <- flights %>% 
+  filter(is.na(dep_time) & is.na(dep_delay) & is.na(arr_time) & is.na(arr_delay) & is.na(arr_time))
+# same 8255 flights
+```
+
+Along with dep_time, dep_delay, arr_time, arr_delay and air_time are also missing, for all 8255 flights. It probably means that those flights were cancelled.
+
+```{r exercise 4}
+
+##################################################
+### 4. Why is NA ^ 0 not missing? Why is NA | TRUE not missing? 
+### Why is FALSE & NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!)
+##################################################
+
+```
+
+
+
+
+
+
+
+
+
+
