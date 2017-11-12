@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br>
 
+Notes and code follow Hadley Wickham's 'R for Data Science' material, Chapter 5. <http://r4ds.had.co.nz/transform.html#introduction-2>
+
 #### nycflights13
 ```{r message=FALSE, warning=FALSE}
 ##########################################
@@ -105,7 +107,7 @@ Ex1.4b = filter(flights, between(month, 7, 9))
 ###    What might these rows represent?
 #################################
 
-sum(is.na(flights$dep_time) ) # 8255
+sum(is.na(flights$dep_time)) # 8255
 
 flights_missing_dep_time <- flights %>% filter(is.na(dep_time))
 flights_missing_dep_time 
