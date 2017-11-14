@@ -13,7 +13,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Notes and code follow Hadley Wickham's 'R for Data Science' material, Chapter 5. <http://r4ds.had.co.nz/transform.html#introduction-2>
 
-#### nycflights13
+### 5.1 Introduction
+
+
+#### `nycflights13`
 ```{r message=FALSE, warning=FALSE}
 ##########################################
 #######  5 Data Transformation
@@ -25,7 +28,9 @@ nycflights13::flights
 
 <br>
 
-#### Explore, try %in%
+### 5.2 Filter
+
+#### Explore, try `%in%`
 ```{r explore}
 
 jan1 <- filter(flights, month == 1, day == 1)
@@ -129,7 +134,14 @@ Along with dep_time, dep_delay, arr_time, arr_delay and air_time are also missin
 ```
 
 
+### 5.3 Arrange
 
+`arrange()` works similarly to `filter()` except that instead of selecting rows, it changes their order. It takes a data frame and a set of column names (or more complicated expressions) to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
+
+```{r}
+arrange(flights, year, month, day)
+arrange(flights, desc(arr_delay))
+```
 
 
 
