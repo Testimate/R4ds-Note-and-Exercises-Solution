@@ -143,9 +143,19 @@ arrange(flights, year, month, day)
 arrange(flights, desc(arr_delay))
 ```
 
+```{r}
+df <- tibble(x = c(5, 2, NA))
+arrange(df, x)
+```
+In this way, `x` then becomes the column name of the tibble `df`.
 
+#### 5.3.1 Exercise
+##### 1. How could you use `arrange()` to sort all missing values to the start? (Hint: use `is.na()`).
 
-
+```{r}
+arrange(df, !is.na(x))
+```
+By the logic that ' `FALSE` is less than `TRUE` '.
 
 
 
