@@ -60,20 +60,18 @@ NYCtoSF2
 
 <br>
 
-####  5.2.4 Exercises
+###  5.2.4 Exercises
+### 1. Find all flights that
+##### 1.1 Had an arrival delay of two or more hours
+##### 1.2. Flew to Houston (IAH or HOU)
+##### 1.3. Were operated by United, American, or Delta
+##### 1.4. Departed in summer (July, August, and September)
+##### 1.5. Arrived more than two hours late, but didn’t leave late
+##### 1.6. Were delayed by at least an hour, but made up over 30 minutes in flight
+##### 1.7. Departed between midnight and 6am (inclusive)
+
 ```{r exercise 1.1}
  
-#################################
-### 1. Find all flights that
-# ###############################
-## 1. Had an arrival delay of two or more hours
-## 2. Flew to Houston (IAH or HOU)
-## 3. Were operated by United, American, or Delta
-## 4. Departed in summer (July, August, and September)
-## 5. Arrived more than two hours late, but didn’t leave late
-## 6. Were delayed by at least an hour, but made up over 30 minutes in flight
-## 7. Departed between midnight and 6am (inclusive)
-
 Ex1.1 <- 
   flights %>%
     filter(arr_delay >= 120) %>%
@@ -94,24 +92,20 @@ Ex1.6 = filter(flights, dep_delay >= 60 & dep_delay - arr_delay >= 30)
 Ex1.7 = filter(flights, dep_time <= 600)
 ```
 
+<br>
+
+#### 2. Another useful dplyr filtering helper is `between()`. What does it do? Can you use it to simplify the code needed to answer the previous challenges?
+
 ```{r exercise 2}
-
-#################################
-### 2. Another useful dplyr filtering helper is between(). 
-###    What does it do? Can you use it to simplify the code needed to answer the previous challenges?
-#################################
-
 ?between
 Ex1.4b = filter(flights, between(month, 7, 9))
 ```
 
+<br>
+
+#### 3. How many flights have a missing dep_time? What other variables are missing? What might these rows represent?
 
 ```{r exercise 3}
-#################################
-### 3. How many flights have a missing dep_time? What other variables are missing? 
-###    What might these rows represent?
-#################################
-
 sum(is.na(flights$dep_time)) # 8255
 
 flights_missing_dep_time <- flights %>% filter(is.na(dep_time))
@@ -124,15 +118,23 @@ flights_cancelled <- flights %>%
 
 Along with dep_time, dep_delay, arr_time, arr_delay and air_time are also missing, for all 8255 flights. It probably means that those flights were cancelled.
 
-```{r exercise 4}
+<br>
 
-##################################################
-### 4. Why is NA ^ 0 not missing? Why is NA | TRUE not missing? 
-### Why is FALSE & NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!)
-##################################################
+#### 4. Why is `NA ^ 0` not missing? Why is `NA | TRUE` not missing? Why is `FALSE & NA` not missing? Can you figure out the general rule? (`NA * 0` is a tricky counterexample!)
 
+`NA ^ 0` returns 1. Any number to the power of 0 is 1, whether the number is missing or not does not matter.
+
+`NA | TRUE` returns TRUE, since the `|` operator returns TRUE if either of the terms are TRUE. In this case, the right half is TRUE, so the whole expression will always return TRUE. 
+
+`FALSE & NA` returns FALSE, because operator `&` returns TRUE when both terms are true. The left half is FALSE, so the whole expression returns FALSE despite the NA on the right half.
+
+```{r}
+NA * 0
 ```
 
+`NA * 0` returns 0, whicn may rendered the general rule we discovered from the previous not definite: if NA represent a value that is `Inf`, and we know `Inf` * 0 should not be a number, i.e., `NaN`.
+
+<br>
 
 ### 5.3 Arrange
 
@@ -149,13 +151,15 @@ arrange(df, x)
 ```
 In this way, `x` then becomes the column name of the tibble `df`.
 
+<br>
+
 #### 5.3.1 Exercise
 ##### 1. How could you use `arrange()` to sort all missing values to the start? (Hint: use `is.na()`).
 
 ```{r}
 arrange(df, !is.na(x))
 ```
-By the logic that ' `FALSE` is less than `TRUE` '.
+It seems that R recognized `FALSE` as 0 and `TRUE` as 1, so `FALSE` is less than `TRUE`.
 
 
 
