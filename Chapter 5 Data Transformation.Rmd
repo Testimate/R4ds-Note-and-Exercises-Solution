@@ -173,5 +173,13 @@ flights %>%
   arrange(dep_time)
 ```
 
+which may lead to an idea of creating a function:
+
+
+idea: topRanking (smallest/largest, variable)
+
+
+
+
 
 
