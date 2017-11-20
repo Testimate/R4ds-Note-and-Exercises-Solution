@@ -19,7 +19,7 @@ Notes and code follow Hadley Wickham's 'R for Data Science' material, Chapter 5.
 #### `nycflights13`
 ```{r message=FALSE, warning=FALSE}
 ##########################################
-#######  5 Data Transformation
+####### Dataset: nycflights13::flights
 ########################################## 
 library(nycflights13)
 library(tidyverse)
@@ -159,7 +159,19 @@ In this way, `x` then becomes the column name of the tibble `df`.
 ```{r}
 arrange(df, !is.na(x))
 ```
-It seems that R recognized `FALSE` as 0 and `TRUE` as 1, so `FALSE` is less than `TRUE`.
+It seems that R recognized `FALSE` as 0 and `TRUE` as 1, so `FALSE` is less than `TRUE`, hence can be ordered.
+
+
+##### 2. Sort `flights` to find the most delayed flights. Find the flights that left earliest.
+
+```{r}
+colnames(flights)
+flights %>% 
+  arrange(desc(arr_delay))
+
+flights %>%
+  arrange(dep_time)
+```
 
 
 
