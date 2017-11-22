@@ -176,7 +176,7 @@ flights %>%
 which may lead to an idea of creating a function:
 
 
-idea: topRanking (smallest/largest, variable)
+idea: topRanking (smallest/largest, variable) and put it on Shiny
 
 
 
