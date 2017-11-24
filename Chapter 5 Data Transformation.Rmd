@@ -175,9 +175,18 @@ flights %>%
 
 which may lead to an idea of creating a function:
 
-
 idea: topRanking (smallest/largest, variable) and put it on Shiny
 
+
+##### 3. Sort `flights` to find the fastest flights.
+```{r}
+flights %>% 
+  mutate(timeOnAir =  ifelse(arr_time - dep_time < 0, arr_time + 2400 -dep_time, arr_time - dep_time)) %>%
+    select(origin, dest, dep_time, sched_dep_time, arr_time, sched_arr_time, air_time, timeOnAir) %>%
+      arrange(desc(timeOnAir))
+```
+  
+  
 
 
 
