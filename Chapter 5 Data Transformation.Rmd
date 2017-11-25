@@ -182,12 +182,16 @@ idea: topRanking (smallest/largest, variable) and put it on Shiny
 ```{r}
 flights %>% 
   mutate(timeOnAir =  ifelse(arr_time - dep_time < 0, arr_time + 2400 -dep_time, arr_time - dep_time)) %>%
-    select(origin, dest, dep_time, sched_dep_time, arr_time, sched_arr_time, air_time, timeOnAir) %>%
+    select(origin, dest, dep_time, sched_dep_time, arr_time, sched_arr_time, timeOnAir) %>%
+      arrange(timeOnAir)
+
+# and the slowest flights 
+flights %>% 
+  mutate(timeOnAir =  ifelse(arr_time - dep_time < 0, arr_time + 2400 -dep_time, arr_time - dep_time)) %>%
+    select(origin, dest, dep_time, sched_dep_time, arr_time, sched_arr_time, timeOnAir) %>%
       arrange(desc(timeOnAir))
 ```
-  
-  
-
+The most unexpected flights, like the one from EWR to ORD that took 19 hours 25 minutes, can be spotted and further investigated.
 
 
 
