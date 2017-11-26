@@ -179,19 +179,42 @@ idea: topRanking (smallest/largest, variable) and put it on Shiny
 
 
 ##### 3. Sort `flights` to find the fastest flights.
+Idea: create a variable `timeOnAir` to measure the flight time.
+
+Tricky: The way how `dep_time` and `arr_time` is coded needs a slightly modification.
 ```{r}
 flights %>% 
-  mutate(timeOnAir =  ifelse(arr_time - dep_time < 0, arr_time + 2400 -dep_time, arr_time - dep_time)) %>%
+  mutate(timeOnAir = ifelse(arr_time - dep_time < 0, arr_time + 2400 - dep_time, arr_time - dep_time)) %>%
     select(origin, dest, dep_time, sched_dep_time, arr_time, sched_arr_time, timeOnAir) %>%
       arrange(timeOnAir)
 
 # and the slowest flights 
-flights %>% 
-  mutate(timeOnAir =  ifelse(arr_time - dep_time < 0, arr_time + 2400 -dep_time, arr_time - dep_time)) %>%
+flights %>%
+  mutate(timeOnAir = ifelse(arr_time - dep_time < 0, arr_time + 2400 - dep_time, arr_time - dep_time)) %>%
     select(origin, dest, dep_time, sched_dep_time, arr_time, sched_arr_time, timeOnAir) %>%
       arrange(desc(timeOnAir))
+
+flights_Testimate <- flights %>%
+  mutate(timeOnAir = ifelse(arr_time - dep_time < 0, arr_time + 2400 - dep_time, arr_time - dep_time)) 
 ```
 The most unexpected flights, like the one from EWR to ORD that took 19 hours 25 minutes, can be spotted and further investigated.
+
+
+##### 4. Which flights travelled the longest? Which travelled the shortest?
+Idea: sort variable `distance`
+```{r}
+# The longest flights
+flights_Testimate %>%
+  select(carrier:distance, timeOnAir) %>%
+    arrange(desc(distance))
+
+# The shortest flights
+flights_Testimate %>%
+  select(carrier:distance, timeOnAir) %>%
+    arrange(distance)
+
+```
+
 
 
 
