@@ -177,7 +177,6 @@ which may lead to an idea of creating a function:
 
 idea: topRanking (smallest/largest, variable) and put it on Shiny
 
-
 ##### 3. Sort `flights` to find the fastest flights.
 Idea: create a variable `timeOnAir` to measure the flight time.
 
@@ -208,6 +207,21 @@ flights_Testimate %>%
   select(carrier:distance, timeOnAir) %>%
     arrange(desc(distance))
 
+# The longest flight where destination is not HNL
+flights_Testimate %>%
+  select(carrier:distance, timeOnAir) %>%
+    filter(dest != 'HNL') %>%
+      arrange(desc(distance))
+
+# Besides HNL and ANC
+flights_Testimate %>%
+  select(carrier:distance, timeOnAir) %>%
+    filter(dest != 'HNL' & dest != "ANC") %>%
+      arrange(desc(distance))
+```
+The second longest flight is from EWR to ANC. The third one is to SFO.
+
+```{r}
 # The shortest flights
 flights_Testimate %>%
   select(carrier:distance, timeOnAir) %>%
