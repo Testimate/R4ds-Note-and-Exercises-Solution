@@ -215,6 +215,10 @@ flights_Testimate %>%
 
 ```
 
+```{r}
+flights_Testimate %>%
+  filter(distance == 17)
+```
 
 
 
