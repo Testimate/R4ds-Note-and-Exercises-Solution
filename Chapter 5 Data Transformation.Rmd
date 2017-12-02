@@ -154,7 +154,7 @@ In this way, `x` then becomes the column name of the tibble `df`.
 <br>
 
 #### 5.3.1 Exercise
-##### 1. How could you use `arrange()` to sort all missing values to the start? (Hint: use `is.na()`).
+#### 1. How could you use `arrange()` to sort all missing values to the start? (Hint: use `is.na()`).
 
 ```{r}
 arrange(df, !is.na(x))
@@ -162,7 +162,7 @@ arrange(df, !is.na(x))
 It seems that R recognized `FALSE` as 0 and `TRUE` as 1, so `FALSE` is less than `TRUE`, hence can be ordered.
 
 
-##### 2. Sort `flights` to find the most delayed flights. Find the flights that left earliest.
+#### 2. Sort `flights` to find the most delayed flights. Find the flights that left earliest.
 
 ```{r}
 colnames(flights)
@@ -177,7 +177,7 @@ which may lead to an idea of creating a function:
 
 idea: topRanking (smallest/largest, variable) and put it on Shiny
 
-##### 3. Sort `flights` to find the fastest flights.
+#### 3. Sort `flights` to find the fastest flights.
 Idea: create a variable `timeOnAir` to measure the flight time.
 
 Tricky: The way how `dep_time` and `arr_time` is coded needs a slightly modification.
@@ -218,8 +218,14 @@ flights_Testimate %>%
   select(carrier:distance, timeOnAir) %>%
     filter(dest != 'HNL' & dest != "ANC") %>%
       arrange(desc(distance))
+
+# Besides HNL, ANC and JFK to SFO
+flights_Testimate %>%
+  select(carrier:distance, timeOnAir) %>%
+    filter(dest != 'HNL' & dest != "ANC" & dest != "SFO") %>%
+      arrange(desc(distance))
 ```
-The second longest flight is from EWR to ANC. The third one is to SFO.
+The second longest flight is from EWR to ANC. The third one is JFK to SFO, and the forth longest flight within United States is from JFK to OAK.
 
 ```{r}
 # The shortest flights
@@ -233,6 +239,29 @@ flights_Testimate %>%
 flights_Testimate %>%
   filter(distance == 17)
 ```
+
+### 5.4 Select
+
+`select()` can be used to rename variables, but it’s rarely useful because it drops all of the variables not explicitly mentioned. Instead, use `rename()`, which is a variant of `select()` that keeps all the variables that aren’t explicitly mentioned
+
+
+```{r}
+# change tailnum to tail_num
+
+flights_Testimate %>%
+  rename(tail_num = tailnum)
+```
+
+Nothing changes the original dataset `flights_Testimate`, which still has that variable named `tailnum`.
+
+Another option is to use `select()` in conjunction with the `everything()` helper. This is useful if you have a handful of variables you’d like to move to the start of the data frame.
+
+Move some main information to the start of the dataframe and keep the rest:
+```{r}
+flights_Testimate %>%
+  select(carrier:dest, everything())
+```
+
 
 
 
