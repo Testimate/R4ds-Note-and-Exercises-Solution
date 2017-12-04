@@ -178,7 +178,7 @@ which may lead to an idea of creating a function:
 idea: topRanking (smallest/largest, variable) and put it on Shiny
 
 #### 3. Sort `flights` to find the fastest flights.
-Idea: create a variable `timeOnAir` to measure the flight time.
+Idea: create a variable `timeOnAir` to measure the flight time, and create a new dataset `flights_Testimate` that contains `timeOnAir`.
 
 Tricky: The way how `dep_time` and `arr_time` is coded needs a slightly modification.
 ```{r}
@@ -248,7 +248,7 @@ flights_Testimate %>%
 ```{r}
 # change tailnum to tail_num
 
-flights_Testimate %>%
+flights %>%
   rename(tail_num = tailnum)
 ```
 
@@ -258,11 +258,47 @@ Another option is to use `select()` in conjunction with the `everything()` helpe
 
 Move some main information to the start of the dataframe and keep the rest:
 ```{r}
-flights_Testimate %>%
+flights%>%
   select(carrier:dest, everything())
 ```
 
 
+#### 5.4.1 Exercise
 
+#### 1.Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.
+
+0. Just list all the variables to select 
+```{r}
+flights %>%
+  select(dep_time, dep_delay, arr_time, arr_delay)
+```
+
+1. `starts_with` 
+
+```{r}
+flights %>%
+  select(starts_with("dep"), starts_with("arr"))
+
+```
+
+2. `ends_with` (inefficient in our case)
+```{r}
+flights %>%
+  select(ends_with("time"), ends_with("delay")) %>% 
+    select(-c(starts_with("sched"), starts_with("air")))
+
+```
+
+
+3. Fancier (based on the specific arrangment of variables in our dataset)
+```{r}
+flights %>% select(dep_time:arr_delay, -c(contains("sched")))
+```
+
+
+4. Use `matches`
+```{r}
+flights %>% select(matches("^dep|^arr"))
+```
 
 
