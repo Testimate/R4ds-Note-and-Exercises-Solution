@@ -199,7 +199,7 @@ flights_Testimate <- flights %>%
 The most unexpected flights, like the one from EWR to ORD that took 19 hours 25 minutes, can be spotted and further investigated.
 
 
-##### 4. Which flights travelled the longest? Which travelled the shortest?
+#### 4. Which flights travelled the longest? Which travelled the shortest?
 Idea: sort variable `distance`
 ```{r}
 # The longest flights
@@ -258,12 +258,12 @@ Another option is to use `select()` in conjunction with the `everything()` helpe
 
 Move some main information to the start of the dataframe and keep the rest:
 ```{r}
-flights%>%
+flights %>%
   select(carrier:dest, everything())
 ```
 
 
-#### 5.4.1 Exercise
+### 5.4.1 Exercise
 
 #### 1.Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.
 
