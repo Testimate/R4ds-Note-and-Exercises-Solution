@@ -267,38 +267,41 @@ flights%>%
 
 #### 1.Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.
 
-0. Just list all the variables to select 
+1.0. Just list all the variables to select 
 ```{r}
 flights %>%
   select(dep_time, dep_delay, arr_time, arr_delay)
 ```
 
-1. `starts_with` 
+1.1. `starts_with` and `ends_with`
 
 ```{r}
 flights %>%
   select(starts_with("dep"), starts_with("arr"))
 
-```
-
-2. `ends_with` (inefficient in our case)
-```{r}
 flights %>%
   select(ends_with("time"), ends_with("delay")) %>% 
     select(-c(starts_with("sched"), starts_with("air")))
-
 ```
 
-
-3. Fancier (based on the specific arrangment of variables in our dataset)
+1.2. Fancier: `contains` 
 ```{r}
 flights %>% select(dep_time:arr_delay, -c(contains("sched")))
 ```
 
 
-4. Use `matches`
+1.3. Start learning `matches` syntax
 ```{r}
 flights %>% select(matches("^dep|^arr"))
 ```
+
+#### 2. What happens if you include the name of a variable multiple times in a `select()` call?
+
+```{r}
+flights %>% select(dep_time, dep_time, dep_time)
+```
+
+You select the variable once despite multiple select call.
+
 
 
