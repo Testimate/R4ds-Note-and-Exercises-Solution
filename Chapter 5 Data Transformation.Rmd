@@ -304,4 +304,20 @@ flights %>% select(dep_time, dep_time, dep_time)
 You select the variable once despite multiple select call.
 
 
+#### 3. What does the one_of() function do? Why might it be helpful in conjunction with this vector? `vars <- c("year", "month", "day", "dep_delay", "arr_delay")`
+```{r}
+vars <- c("year", "month", "day", "dep_delay", "arr_delay")
+flights %>% select(one_of(vars))
+```
+
+#### 4. Does the result of running the following code surprise you? How do the select helpers deal with case by default? How can you change that default?
+
+```{r}
+select(flights, contains("TIME"))
+select(flights, contains("TIME", ignore.case = FALSE))
+```
+
+
+
+
 
