@@ -178,7 +178,7 @@ which may lead to an idea of creating a function:
 idea: topRanking (smallest/largest, variable) and put it on Shiny
 
 #### 3. Sort `flights` to find the fastest flights.
-Idea: create a variable `timeOnAir` to measure the flight time, and create a new dataset `flights_Testimate` that contains `timeOnAir`.
+Idea: create a variable `timeOnAir` to measure the flight time (`arr_time - dep_time`, while `air_time` is the time when plane is literally on air), and create a new dataset `flights_Testimate` that contains `timeOnAir`.
 
 Tricky: The way how `dep_time` and `arr_time` is coded needs a slightly modification.
 ```{r}
@@ -318,6 +318,20 @@ select(flights, contains("TIME", ignore.case = FALSE))
 ```
 
 
+### 5.5 Add new variables with `mutate()`
+
+```{r}
+flights_sml <- select(flights, 
+  year:day, 
+  ends_with("delay"), 
+  distance, 
+  air_time
+)
+mutate(flights_sml,
+  gain = arr_delay - dep_delay,
+  speed = distance / air_time * 60
+)
+```
 
 
 
