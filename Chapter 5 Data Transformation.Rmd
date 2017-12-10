@@ -301,7 +301,7 @@ flights %>% select(matches("^dep|^arr"))
 flights %>% select(dep_time, dep_time, dep_time)
 ```
 
-You select the variable once despite multiple select call.
+Just select the variable once despite multiple select call.
 
 
 #### 3. What does the one_of() function do? Why might it be helpful in conjunction with this vector? `vars <- c("year", "month", "day", "dep_delay", "arr_delay")`
@@ -316,6 +316,8 @@ flights %>% select(one_of(vars))
 select(flights, contains("TIME"))
 select(flights, contains("TIME", ignore.case = FALSE))
 ```
+
+`contains` does not treat argument with case sensitive by default. Use `ignore.case = FALSE` to cange that setting.
 
 
 ### 5.5 Add new variables with `mutate()`
@@ -332,6 +334,25 @@ mutate(flights_sml,
   speed = distance / air_time * 60
 )
 ```
+
+If you only want to keep the new variables, use `transmute()`:
+
+
+```{r}
+transmute(flights,
+  gain = arr_delay - dep_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours  # minutes gain per airtime hour
+)
+```
+
+
+#### 5.5.1 Useful creation functions
+
+The key property is that the function `mutate` must be vectorised: it must take a vector of values as input, return a vector with the same number of values as output. 
+
+If one parameter is shorter than the other, it will be automatically extended to be the same length. This is most useful when one of the arguments is a single number: air_time / 60, hours * 60 + minute, etc.
+
 
 
 
