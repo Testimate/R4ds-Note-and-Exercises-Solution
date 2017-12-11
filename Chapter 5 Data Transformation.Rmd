@@ -370,9 +370,9 @@ min_rank(desc(y))
 Modular arithmetic: `%/%` (integer division) and `%%` (remainder), where `x == y * (x %/% y) + (x %% y)`
 
 ```{r}
-flights %>% 
-  selec(dep_time, sched_dep_time) %>%
-    mutate(dep_time_continue = )
+flights_Testimate = flights %>% 
+  # select(dep_time, sched_dep_time) %>%
+    mutate(dep_time_totalMinutes = dep_time %/% 100 * 60 + dep_time %% 100, sched_dep_time_totalMinutes = sched_dep_time %/% 100 * 60 + sched_dep_time %% 100)
 
 ```
 
