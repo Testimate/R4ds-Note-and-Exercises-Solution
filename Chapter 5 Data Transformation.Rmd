@@ -371,10 +371,13 @@ Modular arithmetic: `%/%` (integer division) and `%%` (remainder), where `x == y
 
 ```{r}
 flights_Testimate = flights %>% 
-  # select(dep_time, sched_dep_time) %>%
-    mutate(dep_time_totalMinutes = dep_time %/% 100 * 60 + dep_time %% 100, sched_dep_time_totalMinutes = sched_dep_time %/% 100 * 60 + sched_dep_time %% 100)
+    mutate(dep_time_totalMinutes = dep_time %/% 100 * 60 + dep_time %% 100, sched_dep_time_totalMinutes = sched_dep_time %/% 100 * 60 + sched_dep_time %% 100) %>%
+    select(year:dep_delay,dep_time_totalMinutes,sched_dep_time_totalMinutes,arr_time:time_hour )
 
 ```
+Use `select` to rearrange column orders.
 
+
+2. Compare `air_time` with `arr_time - dep_time`. What do you expect to see? What do you see? What do you need to do to fix it?
 
 
