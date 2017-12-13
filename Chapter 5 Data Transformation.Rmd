@@ -369,7 +369,7 @@ min_rank(desc(y))
 Modular arithmetic: `%/%` (integer division) and `%%` (remainder), where `x == y * (x %/% y) + (x %% y)`
 
 ```{r}
-flights_Testimate = flights %>% 
+flights_5.5.2.1 = flights_Testimate %>% 
     mutate(dep_time_totalMinutes = dep_time %/% 100 * 60 + dep_time %% 100, sched_dep_time_totalMinutes = sched_dep_time %/% 100 * 60 + sched_dep_time %% 100) %>%
     select(year:dep_delay,dep_time_totalMinutes,sched_dep_time_totalMinutes,arr_time:time_hour )
 ```
@@ -386,10 +386,9 @@ flights_5.5.2.2 <- flights_Testimate %>%
 
 
 ```{r}
-flights_Testimate = flights %>% 
-    mutate(dep_time_totalMinutes = dep_time %/% 100 * 60 + dep_time %% 100, sched_dep_time_totalMinutes = sched_dep_time %/% 100 * 60 + sched_dep_time %% 100) %>%
-    select(year:dep_delay,dep_time_totalMinutes,sched_dep_time_totalMinutes,arr_time:time_hour )
-```
+flights_Testimate = flights_Testimate %>%
+  mutate(dep_time_totalMinutes = dep_time %/% 100 * 60 + dep_time %% 100, sched_dep_time_totalMinutes = sched_dep_time %/% 100 * 60 + sched_dep_time %% 100, arr_time_totalMinutes = arr_time %/% 100 * 60 + arr_time %% 100, sched_arr_time_totalMinutes = sched_arr_time %/% 100 * 60 + sched_arr_time %% 100) %>%
+  select(year:arr_delay,dep_time_totalMinutes, sched_dep_time_totalMinutes, arr_time_totalMinutes, sched_arr_time_totalMinutes, air_time, carrier:travelTime)
 ```
 
 
