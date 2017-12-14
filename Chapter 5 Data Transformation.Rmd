@@ -379,16 +379,21 @@ Use `select` to rearrange column orders.
 2. Compare `air_time` with `arr_time - dep_time`. What do you expect to see? What do you see? What do you need to do to fix it?
 
 ```{r}
-flights_5.5.2.2 <- flights_Testimate %>% 
+flights_Testimate %>% 
   mutate(arr_dep = arr_time - dep_time) %>%
-    select(carrier:air_time, arr_dep)
+    select(carrier:air_time, arr_dep) 
 ```
 
+We expect to see `air_time` equals `arr_time - dep_time`, however they are not remotely equal, and they shouldn't be, because as mentioned in problem 1, `dep_time` and `arr_time` (and their corresponding scheduked version) are not recorded in a continous manner but hour and minutes. So a version of more convenient representation of number of minutes since midnight should be created.
 
 ```{r}
 flights_Testimate = flights_Testimate %>%
-  mutate(dep_time_totalMinutes = dep_time %/% 100 * 60 + dep_time %% 100, sched_dep_time_totalMinutes = sched_dep_time %/% 100 * 60 + sched_dep_time %% 100, arr_time_totalMinutes = arr_time %/% 100 * 60 + arr_time %% 100, sched_arr_time_totalMinutes = sched_arr_time %/% 100 * 60 + sched_arr_time %% 100) %>%
-  select(year:arr_delay,dep_time_totalMinutes, sched_dep_time_totalMinutes, arr_time_totalMinutes, sched_arr_time_totalMinutes, air_time, carrier:travelTime)
+  mutate(dep_time_totalMinutes = dep_time %/% 100 * 60 + dep_time %% 100, 
+         sched_dep_time_totalMinutes = sched_dep_time %/% 100 * 60 + sched_dep_time %% 100, 
+         arr_time_totalMinutes = arr_time %/% 100 * 60 + arr_time %% 100, 
+         sched_arr_time_totalMinutes = sched_arr_time %/% 100 * 60 + sched_arr_time %% 100) %>%
+   select(year:arr_delay,dep_time_totalMinutes, sched_dep_time_totalMinutes, arr_time_totalMinutes, 
+          sched_arr_time_totalMinutes, air_time, carrier:travelTime)
 ```
 
 
