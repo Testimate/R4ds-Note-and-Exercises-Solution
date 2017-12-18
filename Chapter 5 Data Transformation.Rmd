@@ -178,7 +178,10 @@ which may lead to an idea of creating a function:
 idea: topRanking (smallest/largest, variable) and put it on Shiny
 
 #### 3. Sort `flights` to find the fastest flights.
-Idea: create a variable `travelTime` to measure the flight time (`arr_time - dep_time`. Noted that `dep_time` and `arr_time` are convenient to look at, but hard to compute with because they’re not really continuous numbers. A more convenient representation of number of minutes since midnight are yet to be computed. So `travelTime` are not real minutes. More details and discussion can be found in exersice 5.5.2 problem 2. <http://r4ds.had.co.nz/transform.html#exercises-10>). 
+
+(!!!!!!! Pending to Improve)
+
+Idea: create a variable `travelTime` to measure the flight time (`arr_time - dep_time`. Noted that `dep_time` and `arr_time` are convenient to look at, but hard to compute with because they’re not really continuous numbers. A more convenient representation of number of minutes since midnight are yet to be computed. So `travelTime` are neithwe real minutes nor hours and minutes like `dep_time` and `arr_time`. More details and discussion can be found in exersice 5.5.2 problem 2. <http://r4ds.had.co.nz/transform.html#exercises-10>). 
 
 Tricky: The way how `dep_time` and `arr_time` is coded needs a slightly modification.
 ```{r}
@@ -384,7 +387,7 @@ flights_Testimate %>%
     select(carrier:air_time, arr_dep) 
 ```
 
-We expect to see `air_time` equals `arr_time - dep_time`, however they are not remotely equal, and they shouldn't be, because as mentioned in problem 1, `dep_time` and `arr_time` (and their corresponding scheduked version) are not recorded in a continous manner but hour and minutes. So a version of more convenient representation of number of minutes since midnight should be created.
+We expect to see `air_time` equals `arr_time - dep_time`, however they are not remotely equal, and they shouldn't be, because as mentioned in problem 1, `dep_time` and `arr_time` (and their corresponding scheduked version) are recorded not in a continous manner of minutes but easy to read hour and minutes. So a version of more convenient representation of number of minutes since midnight should be created.
 
 ```{r}
 flights_Testimate = flights_Testimate %>%
@@ -394,8 +397,14 @@ flights_Testimate = flights_Testimate %>%
          sched_arr_time_totalMinutes = sched_arr_time %/% 100 * 60 + sched_arr_time %% 100) %>%
    select(year:arr_delay,dep_time_totalMinutes, sched_dep_time_totalMinutes, arr_time_totalMinutes, 
           sched_arr_time_totalMinutes, air_time, carrier:travelTime)
+
 ```
 
+```{r}
+flights_Testimate %>%
+  mutate(air_time_minutes = arr_time_totalMinutes - dep_time_totalMinutes) %>%
+    select(carrier:distance, sched_dep_time_totalMinutes, sched_arr_time_totalMinutes, dep_time_totalMinutes, arr_time_totalMinutes, air_time_minutes, air_time)
+```
 
 
 
