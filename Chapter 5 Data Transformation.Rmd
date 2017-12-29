@@ -407,5 +407,11 @@ flights_Testimate %>%
 ```
 
 
+3. Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you expect those three numbers to be related?
+
+
+
+
+
 
 
