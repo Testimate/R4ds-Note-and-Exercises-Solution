@@ -409,9 +409,18 @@ flights_Testimate %>%
 
 3. Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you expect those three numbers to be related?
 
+```{r}
+flights_Testimate %>%
+  mutate(dep_delay_copy = dep_time - sched_dep_time) %>%
+    select(dep_time, sched_dep_time, dep_delay_copy, dep_delay)
+```
 
+```{r}
+flights_Testimate %>%
+  mutate(dep_delay_copy = dep_time_totalMinutes - sched_dep_time_totalMinutes) %>%
+    select(dep_time, sched_dep_time, dep_delay_copy, dep_delay)
 
-
+```
 
 
 
