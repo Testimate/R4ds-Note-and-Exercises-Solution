@@ -436,11 +436,17 @@ flights_Testimate %>%
 Improved version (without having to create a new variable)
 ```{r}
 flights_Testimate %>%
-  filter(min_rank(desc(arr_delay)) <=10) %>%
+  filter(min_rank(desc(arr_delay)) <= 10) %>%
     select(carrier:dest, arr_delay) %>%
       arrange(desc(arr_delay))
 ```
 
+5. What does 1:3 + 1:10 return? Why?
 
+```{r}
+1:3 + 1:10
+```
+
+It returns a 10 dimensional vector along with a warning message. Looks like the shorter vector 1:3 is repeated out to the length of the longer 1:10 one.
 
 
