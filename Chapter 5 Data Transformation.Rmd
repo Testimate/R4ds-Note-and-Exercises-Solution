@@ -425,6 +425,7 @@ flights_Testimate %>%
 
 4. Find the 10 most delayed flights using a ranking function. How do you want to handle ties? Carefully read the documentation for `min_rank()`.
 
+My first answer: arr_delay
 ```{r}
 flights_Testimate %>%
   mutate(delay_rank = min_rank(desc(arr_delay))) %>%
@@ -432,6 +433,13 @@ flights_Testimate %>%
       arrange(delay_rank)
 ```
 
+Improved version (without having to create a new variable)
+```{r}
+flights_Testimate %>%
+  filter(min_rank(desc(arr_delay)) <=10) %>%
+    select(carrier:dest, arr_delay) %>%
+      arrange(desc(arr_delay))
+```
 
 
 
