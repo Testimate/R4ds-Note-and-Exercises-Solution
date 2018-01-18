@@ -536,7 +536,7 @@ delays <- not_cancelled %>%
   group_by(tailnum) %>% 
   summarise(
     delay = mean(arr_delay, na.rm = TRUE),
-    n = n()  # preparation for calling in ggplot for x axis
+    n = n()  # preparation for 2 uses: 1. as x axis when calling in ggplot 
   )
 
 ggplot(data = delays, mapping = aes(x = n, y = delay)) + 
@@ -552,10 +552,13 @@ When looking at this sort of plot, it’s often useful to filter out the groups 
 
 ```{r}
 delays %>% 
-  filter(n > 25) %>% 
+  filter(n > 25) %>%  # 2. n = n()  can be used later if data needs to be filtered 
   ggplot(mapping = aes(x = n, y = delay)) + 
     geom_point(alpha = 1/10)
 ```
+
+
+RStudio tip: a useful keyboard shortcut is Cmd/Ctrl + Shift + P. This resends the previously sent chunk from the editor to the console. This is very convenient when you’re (e.g.) exploring the value of n in the example above. You send the whole block once with Cmd/Ctrl + Enter, then you modify the value of n and press Cmd/Ctrl + Shift + P to resend the complete block.
 
 
 
