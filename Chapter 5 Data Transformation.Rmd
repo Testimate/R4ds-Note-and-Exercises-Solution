@@ -594,5 +594,23 @@ you see two patterns:
 2. There’s a positive correlation between skill (`ba`) and opportunities to hit the ball (`ab`). This is because teams control who gets to play, and obviously they’ll pick their best players.
 
 
+#### 5.6.4  Useful Summary Functions
+
+It’s sometimes useful to combine aggregation with logical subsetting. 
+
+```{r}
+not_cancelled %>% 
+  group_by(year, month, day) %>% 
+  summarise(
+    avg_delay1 = mean(arr_delay),
+    avg_delay2 = mean(arr_delay[arr_delay > 0]) # the average positive delay
+  )
+```
+
+
+
+
+
+
 
 
