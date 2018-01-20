@@ -632,10 +632,22 @@ not_cancelled %>%
 ```
 
 
+Counts: To count the number of non-missing values, use `sum(!is.na(x))`. To count the number of distinct (unique) values, use `n_distinct(x)`.
 
+Which destinations have the most carriers?
 
+```{r}
+not_cancelled %>% 
+  group_by(dest) %>% 
+  summarise(carriers = n_distinct(carrier)) %>% 
+  arrange(desc(carriers))
+```
 
-
+```{r}
+not_cancelled %>% 
+  count(dest)
+```
+Testimate: similar to `table()`
 
 
 
