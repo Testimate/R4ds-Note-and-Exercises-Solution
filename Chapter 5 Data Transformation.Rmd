@@ -11,9 +11,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br>
 
-Notes and code follow Hadley Wickham's 'R for Data Science' material, Chapter 5. <http://r4ds.had.co.nz/transform.html#introduction-2>
+Notes and code corresponds to Hadley Wickham's 'R for Data Science' material, starting from Chapter 5. <http://r4ds.had.co.nz/transform.html#introduction-2>
 
-### 5.1 Introduction
+
+* [5.1 Introduction](#intro)
+
+* [5.2 Filter](#filter)
+
+### 5.1 Introduction {#intro}
 
 
 #### `nycflights13`
@@ -28,7 +33,7 @@ nycflights13::flights
 
 <br>
 
-### 5.2 Filter
+### 5.2 Filter {#filter}
 
 #### Explore, try `%in%`
 ```{r explore}
