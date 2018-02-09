@@ -18,6 +18,12 @@ Notes and code corresponds to Hadley Wickham's 'R for Data Science' material, st
 
 * [5.2 Filter](#filter)
 
+* [5.2.4 Exercises](#ex_5_2_4)
+
+* [5.3 Arrange](#arrange)
+
+
+
 ### 5.1 Introduction {#intro}
 
 
@@ -65,7 +71,7 @@ NYCtoSF2
 
 <br>
 
-###  5.2.4 Exercises
+###  5.2.4 Exercises  {#ex_5_2_4}
 ### 1. Find all flights that
 ##### 1.1 Had an arrival delay of two or more hours
 ##### 1.2. Flew to Houston (IAH or HOU)
@@ -141,7 +147,7 @@ NA * 0
 
 <br>
 
-### 5.3 Arrange
+### 5.3 Arrange {#arrange}
 
 `arrange()` works similarly to `filter()` except that instead of selecting rows, it changes their order. It takes a data frame and a set of column names (or more complicated expressions) to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
 
@@ -603,6 +609,7 @@ you see two patterns:
 
 It’s sometimes useful to combine aggregation with logical subsetting. 
 
+Problem: Calculate the average postice delay
 ```{r}
 not_cancelled %>% 
   group_by(year, month, day) %>% 
