@@ -22,6 +22,8 @@ Notes and code corresponds to Hadley Wickham's 'R for Data Science' material, st
 
 * [5.3 Arrange](#arrange)
 
+* [5.3.1 Exercise](#ex_5_3_1)
+
 
 
 ### 5.1 Introduction {#intro}
@@ -164,7 +166,7 @@ In this way, `x` then becomes the column name of the tibble `df`.
 
 <br>
 
-#### 5.3.1 Exercise
+#### 5.3.1 Exercise {#ex_5_3_1}
 #### 1. How could you use `arrange()` to sort all missing values to the start? (Hint: use `is.na()`).
 
 ```{r}
