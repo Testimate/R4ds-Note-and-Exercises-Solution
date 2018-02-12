@@ -635,9 +635,11 @@ not_cancelled %>%
 ```
 
 
-These functions are complementary to filtering on ranks. Filtering gives you all variables, with each observation in a separate row:
-#### Testimate: first and last - filter(r %in% range(r))
+These functions are complementary to filtering on ranks. Filtering gives you all variables, with each observation in a separate row
 
+#### Testimate Smart: first and last - filter(r %in% range(r))
+
+`min_rank`
 ```{r}
 not_cancelled %>% 
   group_by(year, month, day) %>% 
