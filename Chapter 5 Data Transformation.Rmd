@@ -38,6 +38,11 @@ Notes and code corresponds to Hadley Wickham's 'R for Data Science' material, st
 
 * [5.6.4 Useful Summary Functions](#summary)
 
+* [5.6.5Grouping by multiple variables](#rollingup)
+
+* [5.6.6 Ungrouping]({ungrouping)
+
+
 
 
 ### 5.1 Introduction {#intro}
@@ -716,7 +721,7 @@ not_cancelled %>%
 
 
 
-#### 5.6.5  Grouping by multiple variables
+#### 5.6.5  Grouping by multiple variables {#rollingup}
 
 When you group by multiple variables, each summary peels off one level of the grouping. That makes it easy to progressively roll up a dataset:
 
@@ -729,4 +734,13 @@ daily <- group_by(flights, year, month, day)
 
 
 Be careful when progressively rolling up summaries: it’s OK for sums and counts, but you need to think about weighting means and variances, and it’s not possible to do it exactly for rank-based statistics like the median. In other words, the sum of groupwise sums is the overall sum, but the median of groupwise medians is not the overall median.
+
+#### 5.6.6 Ungrouping {#ungrouping}
+
+```{r}
+daily %>% 
+  ungroup() %>%             # no longer grouped by date
+  summarise(flights = n())
+```
+
 
