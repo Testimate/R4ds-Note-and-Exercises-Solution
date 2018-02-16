@@ -24,6 +24,8 @@ Notes and code corresponds to Hadley Wickham's 'R for Data Science' material, st
 
 * [5.3.1 Exercise](#ex_5_3_1)
 
+* [5.4 Select](#select)
+
 
 
 ### 5.1 Introduction {#intro}
@@ -256,7 +258,7 @@ flights_Testimate %>%
   filter(distance == 17)
 ```
 
-### 5.4 Select
+### 5.4 Select {#select}
 
 `select()` can be used to rename variables, but it’s rarely useful because it drops all of the variables not explicitly mentioned. Instead, use `rename()`, which is a variant of `select()` that keeps all the variables that aren’t explicitly mentioned
 
@@ -648,7 +650,7 @@ not_cancelled %>%
 ```
 
 
-Counts: To count the number of non-missing values, use `sum(!is.na(x))`. To count the number of distinct (unique) values, use `n_distinct(x)`.
+Counts: To count the number of non-missing values, use `sum(!is.na(x))`. To count the number of distinct (unique) values, use `n_distinct(x)`. For example:
 
 Which destinations have the most carriers?
 
@@ -663,7 +665,22 @@ not_cancelled %>%
 not_cancelled %>% 
   count(dest)
 ```
-Testimate: similar to `table()`
+Testimate: similar to `table()`, with even straightforward command.
+
+You can optionally provide a weight variable. For example, you could use this to “count” (sum) the total number of miles a plane flew:
+
+```{r}
+not_cancelled %>% 
+  count(tailnum, wt = distance)
+```
+
+To verify, we may simply calculate / observe like this: 
+```{r}
+not_cancelled %>%
+  filter(tailnum == "D942DN") %>%
+    select(tailnum, distance)
+```
+
 
 
 
