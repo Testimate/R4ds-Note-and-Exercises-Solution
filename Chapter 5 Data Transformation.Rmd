@@ -22,9 +22,21 @@ Notes and code corresponds to Hadley Wickham's 'R for Data Science' material, st
 
 * [5.3 Arrange](#arrange)
 
-* [5.3.1 Exercise](#ex_5_3_1)
+* [5.3.1 Exercises](#ex_5_3_1)
 
 * [5.4 Select](#select)
+
+* [5.4.1 Exercises](#ex_5_4_1)
+
+* [5.5 Mutate](#mutate)
+
+* [5.5.1 Useful Creation Functions](#useful_creation)
+
+* [5.5.2 Exercises](#ex_5_5_2)
+
+* [5.6 Summarise](#summarise)
+
+* [5.6.4 Useful Summary Functions](#summary)
 
 
 
@@ -281,7 +293,7 @@ flights %>%
 ```
 
 
-### 5.4.1 Exercise
+### 5.4.1 Exercise {#ex_5_4_1}
 
 #### 1.Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.
 
@@ -338,7 +350,7 @@ select(flights, contains("TIME", ignore.case = FALSE))
 `contains` does not treat argument with case sensitive by default. Use `ignore.case = FALSE` to cange that setting.
 
 
-### 5.5 Add new variables with `mutate()`
+### 5.5 Add new variables with `mutate()`  {#mutate}
 
 ```{r}
 flights_sml <- select(flights, 
@@ -365,7 +377,7 @@ transmute(flights,
 ```
 
 
-#### 5.5.1 Useful creation functions
+#### 5.5.1 Useful creation functions {#useful_creation}
 
 The key property is that the function `mutate` must be vectorised: it must take a vector of values as input, return a vector with the same number of values as output. 
 
@@ -465,7 +477,7 @@ flights_Testimate %>%
 It returns a 10 dimensional vector along with a warning message. Looks like the shorter vector 1:3 is repeated out to the length of the longer 1:10 one.
 
 
-#### 5.6 Grouped summaries with `summarise`
+#### 5.6 Grouped summaries with `summarise` {#summarise}
 
 It collapses a data frame to a single row.
 
@@ -609,7 +621,7 @@ you see two patterns:
 2. There’s a positive correlation between skill (`ba`) and opportunities to hit the ball (`ab`). This is because teams control who gets to play, and obviously they’ll pick their best players.
 
 
-#### 5.6.4  Useful Summary Functions
+#### 5.6.4  Useful Summary Functions{#summary}
 
 It’s sometimes useful to combine aggregation with logical subsetting. 
 
@@ -701,6 +713,10 @@ not_cancelled %>%
   group_by(year, month, day) %>% 
   summarise(hour_perc = round(mean(arr_delay > 60), digit = 3))
 ```
+
+
+
+#### 5.6.5  Grouping by multiple variables
 
 
 
