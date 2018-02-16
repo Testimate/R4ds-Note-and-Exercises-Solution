@@ -682,5 +682,27 @@ not_cancelled %>%
 ```
 
 
+Counts and proportions of logical values: `sum(x)` gives the number of TRUEs in x, and `mean(x)` gives the proportion.
+
+```{r}
+# How many flights left before 5am? (these usually indicate delayed
+# flights from the previous day)
+
+not_cancelled %>%
+  group_by(year, month, day) %>%
+  summarize(n_early = sum(dep_time < 500))
+
+```
+
+
+```{r}
+# What proportion of flights are delayed by more than an hour?
+not_cancelled %>% 
+  group_by(year, month, day) %>% 
+  summarise(hour_perc = round(mean(arr_delay > 60), digit = 3))
+```
+
+
+
 
 
