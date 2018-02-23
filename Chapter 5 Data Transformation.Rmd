@@ -13,6 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Notes and code corresponds to Hadley Wickham's 'R for Data Science' material, starting from Chapter 5. <http://r4ds.had.co.nz/transform.html#introduction-2>
 
+<br>
+<br>
 
 * [5.1 Introduction](#intro)
 
@@ -38,11 +40,12 @@ Notes and code corresponds to Hadley Wickham's 'R for Data Science' material, st
 
 * [5.6.4 Useful Summary Functions](#summary)
 
-* [5.6.5Grouping by multiple variables](#rollingup)
+* [5.6.5 Grouping by multiple variables](#rollingup)
 
 * [5.6.6 Ungrouping]({ungrouping)
 
-
+<br>
+<br>
 
 
 ### 5.1 Introduction {#intro}
