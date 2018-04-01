@@ -93,7 +93,7 @@ NYCtoSF2
 <br>
 
 ###  5.2.4 Exercises  {#ex_5_2_4}
-### 1. Find all flights that
+##### 1. Find all flights that
 ##### 1.1 Had an arrival delay of two or more hours
 ##### 1.2. Flew to Houston (IAH or HOU)
 ##### 1.3. Were operated by United, American, or Delta
@@ -148,7 +148,7 @@ flights_cancelled <- flights %>%
 # same 8255 flights
 ```
 
-Along with dep_time, dep_delay, arr_time, arr_delay and air_time are also missing, for all 8255 flights. It probably means that those flights were cancelled.
+Beside `dep_time`, `dep_delay`, `arr_time`, `arr_delay` and `air_time` are also missing, for all 8255 flights. One possible explanation for it is that those flights were cancelled.
 
 <br>
 
@@ -170,7 +170,8 @@ NA * 0
 
 ### 5.3 Arrange {#arrange}
 
-`arrange()` works similarly to `filter()` except that instead of selecting rows, it changes their order. It takes a data frame and a set of column names (or more complicated expressions) to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
+`arrange()` works similarly to `filter()` except that instead of selecting rows, it changes their order. It takes a data frame and a set of column names (or more complicated expressions) to order by. 
+__If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns__:
 
 ```{r}
 arrange(flights, year, month, day)
@@ -191,7 +192,7 @@ In this way, `x` then becomes the column name of the tibble `df`.
 ```{r}
 arrange(df, !is.na(x))
 ```
-It seems that R recognized `FALSE` as 0 and `TRUE` as 1, so `FALSE` is less than `TRUE`, hence can be ordered.
+It seems that R recognized `FALSE` as 0 and `TRUE` as 1, which makes `FALSE` is less than `TRUE`, hence can be sorted to the start use `arrange`.
 
 
 #### 2. Sort `flights` to find the most delayed flights. Find the flights that left earliest.
@@ -205,15 +206,15 @@ flights %>%
   arrange(dep_time)
 ```
 
-which may lead to an idea of creating a function:
+which may lead to an idea to create a function:
 
-idea: topRanking (smallest/largest, variable) and put it on Shiny
+idea: do all the common topRanking (smallest/largest, variable) and put it on Shiny
 
 #### 3. Sort `flights` to find the fastest flights.
 
-(!!!!!!! Pending to Improve)
+__*time form needs to be clearer, answer not reliable*__
 
-Idea: create a variable `travelTime` to measure the flight time (`arr_time - dep_time`. Noted that `dep_time` and `arr_time` are convenient to look at, but hard to compute with because they’re not really continuous numbers. A more convenient representation of number of minutes since midnight are yet to be computed. So `travelTime` are neithwe real minutes nor hours and minutes like `dep_time` and `arr_time`. More details and discussion can be found in exersice 5.5.2 problem 2. <http://r4ds.had.co.nz/transform.html#exercises-10>). 
+Idea: create a variable `travelTime` to measure the flight time (`arr_time - dep_time`. Noted that `dep_time` and `arr_time` are coded in a form that is intuitive to read and comprehend, but a little harder to make further calculation with, because they’re not continuous. A more convenient representation of number of minutes since midnight are yet to be computed. So `travelTime` are neither real minutes nor hours and minutes like `dep_time` and `arr_time`. More details and discussion can be found in exersice 5.5.2 problem 2. <http://r4ds.had.co.nz/transform.html#exercises-10>). 
 
 Tricky: The way how `dep_time` and `arr_time` is coded needs a slightly modification.
 ```{r}
@@ -667,7 +668,7 @@ not_cancelled %>%
 ```
 
 
-Counts: To count the number of non-missing values, use `sum(!is.na(x))`. To count the number of distinct (unique) values, use `n_distinct(x)`. For example:
+__Counts: To count the number of non-missing values, use `sum(!is.na(x))`. To count the number of distinct (unique) values, use `n_distinct(x)`.__  For example:
 
 Which destinations have the most carriers?
 
