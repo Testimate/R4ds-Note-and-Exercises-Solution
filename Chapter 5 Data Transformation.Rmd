@@ -2,7 +2,9 @@
 title: "R4ds Chapter 5 Data Transformation Yuqing Xue Personal Note"
 author: "Yuqing Xue"
 date: "October 22, 2017"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -393,7 +395,7 @@ Ranking: The default gives smallest values the small ranks; use `desc(x)` to giv
 ```{r}
 y <- c(70, 10, 10, NA, 30, 40)
 min_rank(y)
-min_rank(desc(y))
+min_rank(desc(y))  # order by value, more common
 
 ```
 
@@ -420,7 +422,7 @@ flights_Testimate %>%
     select(carrier:air_time, arr_dep) 
 ```
 
-We expect to see `air_time` equals `arr_time - dep_time`, however they are not remotely equal, and they shouldn't be, because as mentioned in problem 1, `dep_time` and `arr_time` (and their corresponding scheduked version) are recorded not in a continous manner of minutes but easy to read hour and minutes. So a version of more convenient representation of number of minutes since midnight should be created.
+We expect to see `air_time` equals `arr_time - dep_time`, however they are not remotely equal, and they shouldn't be, because as mentioned in problem 1, `dep_time` and `arr_time` (and their corresponding scheduked version) are not recorded in a manner that easy to add or substract. So a more convenient version of representation is preferred.
 
 ```{r}
 flights_Testimate = flights_Testimate %>%
