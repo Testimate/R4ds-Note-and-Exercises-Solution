@@ -168,7 +168,7 @@ NA * 0
 
 `NA * 0` returns 0, whicn may rendered the general rule we discovered from the previous not definite: if NA represent a value that is `Inf`, and we know `Inf` * 0 should not be a number, i.e., `NaN`.
 
-<br>
+\vspace*{3\baselineskip}
 
 ### 5.3 Arrange {#arrange}
 
@@ -484,7 +484,7 @@ flights_Testimate %>%
 
 It returns a 10 dimensional vector along with a warning message. Looks like the shorter vector 1:3 is repeated out to the length of the longer 1:10 one.
 
-
+\vspace*{3\baselineskip}
 #### 5.6 Grouped summaries with `summarise` {#summarise}
 
 It collapses a data frame to a single row.
@@ -506,9 +506,7 @@ delays <- flights %>%
   ) %>% 
   filter(count > 20, dest != "HNL")
 
-# It looks like delays increase with distance up to ~750 miles 
-# and then decrease. Maybe as flights get longer there's more 
-# ability to make up delays in the air?
+# It looks like delays increase with distance up to ~750 miles and then decrease. Maybe as flights get longer there's more ability to make up delays in the air?
 ggplot(data = delays, mapping = aes(x = dist, y = delay)) +
   geom_point(aes(size = count), alpha = 1/3) +
   geom_smooth(se = FALSE)
@@ -516,10 +514,11 @@ ggplot(data = delays, mapping = aes(x = dist, y = delay)) +
 ```
 
 
-
+<br>
 
 ##### 5.6.2 Missing Values
 
+Naive failure try:
 ```{r}
 flights %>% 
   group_by(year, month, day) %>% 
@@ -534,7 +533,7 @@ flights %>%
   summarise(mean = mean(dep_delay, na.rm = TRUE))
 ```
 
-
+Departure delay by day:
 
 ```{r}
 not_cancelled <- flights %>% 
@@ -545,11 +544,12 @@ not_cancelled %>%
   summarise(mean = mean(dep_delay))
 ```
 
-#### Applicable Important Section!
+<br>
+
+#### Useful tool alert!
 #### 5.6.3 Counts
 
-##### Whenever you do any aggregation, it’s always a good idea to include either a count `(n())`, or a count of non-missing values `(sum(!is.na(x)))`.
-That way you can check that you’re not drawing conclusions based on very small amounts of data. For example, let’s look at the planes (identified by their tail number) that have the highest average delays:
+##### Whenever you do any aggregation, it’s always a good idea to include either a count `(n())`, or a count of non-missing values `(sum(!is.na(x)))`. That way you can check that you’re not drawing conclusions based on very small amounts of data. For example, let’s look at the planes (identified by their tail number) that have the highest average delays:
 
 ```{r}
 delays <- not_cancelled %>% 
