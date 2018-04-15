@@ -801,5 +801,17 @@ y1
 sort(y1)
 ```
 
+And any values not in the set will be silently converted to NA:
+
+```{r}
+x2 <- c("Dec", "Apr", "Jam", "Mar") # Typo
+
+y2 <- factor(x2, levels = month_levels)
+y2
+```
+
+
+
+
 
 
