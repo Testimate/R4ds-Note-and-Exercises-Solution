@@ -1,0 +1,54 @@
+---
+title: "Chapter 15 Factors"
+author: "Yuqing Xue"
+date: "April 17, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<br>
+
+* [15.1 Factor](#factor)
+
+
+
+### 15.1 Factor {#factor}
+
+Historically, factors were much easier to work with than characters. As a result, many of the functions in base R automatically convert characters to factors. This means that factors often crop up in places where they’re not actually helpful. Fortunately, you don’t need to worry about that in the tidyverse, and can focus on situations where factors are genuinely useful
+
+### 15.2 Creating factors {#createFactor}
+
+```{r}
+
+x1 <- c("Dec", "Apr", "Jan", "Mar")
+
+sort(x1) # doesn't sort in a useful way
+
+```
+
+__You can fix both of these problems with a factor. To create a factor you must start by creating a list of the valid levels:__
+
+```{r}
+
+month_levels <- c(
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+)
+
+y1 <- factor(x1, levels = month_levels)
+y1
+sort(y1)
+```
+
+And any values not in the set will be silently converted to NA:
+
+```{r}
+x2 <- c("Dec", "Apr", "Jam", "Mar") # Typo
+
+y2 <- factor(x2, levels = month_levels)
+y2
+```
+
