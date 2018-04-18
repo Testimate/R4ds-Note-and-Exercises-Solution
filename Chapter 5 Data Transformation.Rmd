@@ -592,7 +592,7 @@ There are some planes that have an average delay of 5 hours (300 minutes), but t
 
 __Use of `n = n()`__
 
-__Testimate: Displays number of cases within each group you defined by `group_by()`. In this case, if we are interested in delay performance for each plane, which is identified by their tail number (`group_by(tailnum)`) ,then under column of `n` shows the number of flights each plane took. 
+__Testimate: Displays number of cases within each group you defined by `group_by()`. In this case, if we are interested in delay performance for each plane, which is identified by their tail number (`group_by(tailnum)`) ,then under column of `n` shows the number of flights each plane took.__ 
 
 ```{r}
 delays <- not_cancelled %>% 
