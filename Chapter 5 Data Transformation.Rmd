@@ -577,6 +577,7 @@ not_cancelled %>%
 __*planes identified by their tail number*__
 
 ```{r}
+# look at the planes (identified by their tail number) that have the highest average delays
 delays <- not_cancelled %>% 
   group_by(tailnum) %>%   
   summarise(
@@ -595,6 +596,7 @@ __Use of `n = n()`__
 __Testimate: Displays number of cases within each group you defined by `group_by()`. In this case, if we are interested in delay performance for each plane, which is identified by their tail number (`group_by(tailnum)`) ,then under column of `n` shows the number of flights each plane took.__ 
 
 ```{r}
+# draw a scatterplot of number of flights vs. average delay
 delays <- not_cancelled %>% 
   group_by(tailnum) %>% 
   summarise(
@@ -615,6 +617,7 @@ When looking at this sort of plot, it’s often useful to filter out the groups 
 
 
 ```{r}
+# filter out the groups with the smallest numbers of observations to see more of the pattern and less of the extreme variation in the smallest groups
 delays %>% 
   filter(n > 25) %>%  
   ggplot(mapping = aes(x = n, y = delay)) + 
@@ -661,8 +664,9 @@ you see two patterns:
 
 It’s sometimes useful to combine aggregation with logical subsetting. 
 
-Problem: Calculate the average postice delay
+*Question: Calculate the average positive delay (by day).*
 ```{r}
+# Calculate the average positive delay (by day)
 not_cancelled %>% 
   group_by(year, month, day) %>% 
   summarise(
@@ -679,7 +683,7 @@ not_cancelled %>%
 not_cancelled %>% 
   group_by(year, month, day) %>% 
   summarise(
-    first_dep = first(dep_time), 
+    first_dep = first(dep_time), # smallest number
     last_dep = last(dep_time)
   )
 ```
@@ -687,22 +691,26 @@ not_cancelled %>%
 
 These functions are complementary to filtering on ranks. Filtering gives you all variables, with each observation in a separate row
 
-#### Testimate Smart: first and last - filter(r %in% range(r))
+*Question: Find the first and last flight of each day.*
 
-`min_rank`
+__Testimate trick: display the first and last (earliest and latest) flight of the day (2 rows for each day): `mutate(r = min_rank(dep_time)) %>% filter(r %in% range(r))` __
+
 ```{r}
+# Find the first and last flight of each day
 not_cancelled %>% 
   group_by(year, month, day) %>% 
-  mutate(r = min_rank(desc(dep_time))) %>% 
+  mutate(r = min_rank((dep_time))) %>% 
   filter(r %in% range(r))
 ```
 
+__ Shiny Idea: The upper bound of `r` is the number of flights that day (600 ~ 1000) __
 
-__Counts: To count the number of non-missing values, use `sum(!is.na(x))`. To count the number of distinct (unique) values, use `n_distinct(x)`.__  For example:
+__ `n_distinct()`: To count the number of non-missing values, use `sum(!is.na(x))`. To count the number of distinct (unique) values, use `n_distinct(x)`.__  
 
-Which destinations have the most carriers?
+*Question: Which destinations `(group_by(dest))` have the most carriers?*
 
 ```{r}
+# Which destinations have the most carriers?
 not_cancelled %>% 
   group_by(dest) %>% 
   summarise(carriers = n_distinct(carrier)) %>% 
