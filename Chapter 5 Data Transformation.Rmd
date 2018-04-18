@@ -49,9 +49,9 @@ The following personal code and notes are based on the materials from Hadley Wic
 
 * [5.6.6 Ungrouping](#ungrouping)
 
-* [15.1 Factor](#factor)
 
-* [15.2 Creating Factors](#createFactor)
+
+
 
 <br>
 
@@ -590,18 +590,22 @@ ggplot(data = delays, mapping = aes(x = delay)) +
 
 There are some planes that have an average delay of 5 hours (300 minutes), but the story is actually a little more nuanced. We can get more insight if we draw a scatterplot of number of flights vs. average delay:
 
+__Use of `n = n()`__
+
+__Testimate: Displays number of cases within each group you defined by `group_by()`. In this case, if we are interested in delay performance for each plane, which is identified by their tail number (`group_by(tailnum)`) ,then under column of `n` shows the number of flights each plane took. 
 
 ```{r}
 delays <- not_cancelled %>% 
   group_by(tailnum) %>% 
   summarise(
     delay = mean(arr_delay, na.rm = TRUE),
-    n = n()  # preparation for 2 uses: 1. as x axis when calling in ggplot 
+    n = n()  
   )
 
 ggplot(data = delays, mapping = aes(x = n, y = delay)) + 
   geom_point(alpha = 1/10)
 ```
+
 
 Not surprisingly, there is much greater variation in the average delay when there are few flights. 
 The shape of this plot is very characteristic: whenever you plot a mean (or other summary) vs. group size, you’ll see that the variation decreases as the sample size increases.
@@ -612,7 +616,7 @@ When looking at this sort of plot, it’s often useful to filter out the groups 
 
 ```{r}
 delays %>% 
-  filter(n > 25) %>%  # 2. n = n()  can be used later if data needs to be filtered 
+  filter(n > 25) %>%  
   ggplot(mapping = aes(x = n, y = delay)) + 
     geom_point(alpha = 1/10)
 ```
@@ -772,43 +776,6 @@ daily %>%
 ```
 
 
-
-### 15.1 Factor {#factor}
-
-Historically, factors were much easier to work with than characters. As a result, many of the functions in base R automatically convert characters to factors. This means that factors often crop up in places where they’re not actually helpful. Fortunately, you don’t need to worry about that in the tidyverse, and can focus on situations where factors are genuinely useful
-
-### 15.2 Creating factors {#createFactor}
-
-```{r}
-
-x1 <- c("Dec", "Apr", "Jan", "Mar")
-
-sort(x1) # doesn't sort in a useful way
-
-```
-
-__You can fix both of these problems with a factor. To create a factor you must start by creating a list of the valid levels:__
-
-```{r}
-
-month_levels <- c(
-  "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-)
-
-y1 <- factor(x1, levels = month_levels)
-y1
-sort(y1)
-```
-
-And any values not in the set will be silently converted to NA:
-
-```{r}
-x2 <- c("Dec", "Apr", "Jam", "Mar") # Typo
-
-y2 <- factor(x2, levels = month_levels)
-y2
-```
 
 
 
