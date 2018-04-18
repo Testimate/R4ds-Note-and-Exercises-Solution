@@ -650,7 +650,6 @@ batters %>%
 #> `geom_smooth()` using method = 'gam'
 ```
 
-
 you see two patterns:
 
 1. As above, the variation in our aggregate decreases as we get more data points.
