@@ -2,17 +2,25 @@
 title: "Chapter 15 Factors"
 author: "Yuqing Xue"
 date: "April 17, 2018"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(forcats)
+```
+
 <br>
 
 * [15.1 Factor](#factor)
-
+* [15.2 Creating Factors] (#createFactor)
+* [15.3 General Social Survey](#GeneralSocialSurvey)
 
 
 ### 15.1 Factor {#factor}
@@ -51,4 +59,24 @@ x2 <- c("Dec", "Apr", "Jam", "Mar") # Typo
 y2 <- factor(x2, levels = month_levels)
 y2
 ```
+
+Sometimes you’d prefer that the order of the levels match the order of the first appearance in the data. You can do that when creating the factor by setting levels to `unique(x)`, or after the fact, with `fct_inorder()`:
+
+```{r}
+f1 <- factor(x1, levels = unique(x1))
+f1
+
+f2 <- x1 %>% factor() %>% fct_inorder()
+f2
+```
+
+If you ever need to access the set of valid levels directly, you can do so with `levels()`:
+
+```{r}
+levels(f2)
+```
+
+
+### 15.3 General Social Survey {#GeneralSocialSurvey}
+
 
