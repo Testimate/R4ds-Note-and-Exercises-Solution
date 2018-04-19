@@ -664,7 +664,7 @@ you see two patterns:
 
 It’s sometimes useful to combine aggregation with logical subsetting. 
 
-*Question: Calculate the average positive delay (by day).*
+__*Question: Calculate the average positive delay (by day).*__
 ```{r}
 # Calculate the average positive delay (by day)
 not_cancelled %>% 
@@ -691,7 +691,7 @@ not_cancelled %>%
 
 These functions are complementary to filtering on ranks. Filtering gives you all variables, with each observation in a separate row
 
-*Question: Find the first and last flight of each day.*
+__*Question: Find the first and last flight of each day.*__
 
 __Testimate trick: display the first and last (earliest and latest) flight of the day (2 rows for each day): `mutate(r = min_rank(dep_time)) %>% filter(r %in% range(r))` __
 
@@ -707,7 +707,7 @@ __ Shiny Idea: The upper bound of `r` is the number of flights that day (600 ~ 1
 
 __ `n_distinct()`: To count the number of non-missing values, use `sum(!is.na(x))`. To count the number of distinct (unique) values, use `n_distinct(x)`.__  
 
-*Question: Which destinations `(group_by(dest))` have the most carriers?*
+__*Question: Which destinations `(group_by(dest))` have the most carriers?*__
 
 ```{r}
 # Which destinations have the most carriers?
@@ -717,6 +717,7 @@ not_cancelled %>%
   arrange(desc(carriers))
 ```
 
+`count`
 ```{r}
 not_cancelled %>% 
   count(dest)
@@ -727,7 +728,7 @@ You can optionally provide a weight variable. For example, you could use this to
 
 ```{r}
 not_cancelled %>% 
-  count(tailnum, wt = distance)
+  count(tailnum, wt = distance) # wt
 ```
 
 To verify, we may simply calculate / observe like this: 
@@ -740,9 +741,9 @@ not_cancelled %>%
 
 Counts and proportions of logical values: `sum(x)` gives the number of TRUEs in x, and `mean(x)` gives the proportion.
 
+__*Question: How many flights left before 5am? (these usually indicate delayed flights from the previous day)*__
 ```{r}
-# How many flights left before 5am? (these usually indicate delayed
-# flights from the previous day)
+# How many flights left before 5am? (these usually indicate delayed flights from the previous day)
 
 not_cancelled %>%
   group_by(year, month, day) %>%
@@ -750,7 +751,7 @@ not_cancelled %>%
 
 ```
 
-
+__*Question: What proportion of flights are delayed by more than an hour?*__
 ```{r}
 # What proportion of flights are delayed by more than an hour?
 not_cancelled %>% 
